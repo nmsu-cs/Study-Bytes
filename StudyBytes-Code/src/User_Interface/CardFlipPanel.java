@@ -8,6 +8,11 @@ import java.awt.event.ActionListener;
 
 public class CardFlipPanel extends JPanel implements ActionListener
 {
+    /**
+     * This class sets up the center panel for FlashcardFrame.
+     * An instance of this class is a flippable flashcard.
+     */
+
     private JButton flipButton;     // Button to "flip" flashcard
     private boolean termDisplayed;  // True if term displayed, false if definition displayed
     private TestData data;          // Data set to use for text display
