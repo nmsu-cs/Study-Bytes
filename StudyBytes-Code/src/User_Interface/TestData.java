@@ -7,13 +7,15 @@ public class TestData
      */
 
     // Array to hold cards (studySet array will be accessed by User_Interface.FlashcardFrame)
-    TestDataStructure[] studySet = new TestDataStructure[4];
+    public TestDataStructure[] studySet;
 
     /**
      * Populate studySet with example cards
      */
     public TestData()
     {
+        studySet = new TestDataStructure[4];
+
         studySet[0] = new TestDataStructure("pamphlet", "a small booklet or leaflet containing information or arguments about a single subject");
         studySet[1] = new TestDataStructure("love", "an intense feeling of deep affection");
         studySet[2] = new TestDataStructure("insanity", "the state of being seriously mentally ill; madness");
