@@ -10,25 +10,26 @@ public class FlashcardFrame extends JFrame
         // Set up frame
         this.setTitle("Study Bytes");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setSize(500, 500);
-        this.setVisible(true);
         this.setLayout(new BorderLayout());
 
-        // Create panels
-        JPanel cardPanel = new JPanel();    // Panel to display flashcards
+        // Create main panel
+        CardFlipPanel cardPanel = new CardFlipPanel();    // Panel to display flashcards
+
+        // Create border panels
         JPanel northPanel = new JPanel();
         JPanel southPanel = new JPanel();
         JPanel eastPanel = new JPanel();
         JPanel westPanel = new JPanel();
 
         // Set border panel sizes
-        northPanel.setPreferredSize(new Dimension(0, 200));
-        southPanel.setPreferredSize(new Dimension(0, 200));
-        eastPanel.setPreferredSize(new Dimension(300, 0));
-        westPanel.setPreferredSize(new Dimension(300, 0));
+        northPanel.setPreferredSize(new Dimension(0, 150));
+        southPanel.setPreferredSize(new Dimension(0, 150));
+        eastPanel.setPreferredSize(new Dimension(250, 0));
+        westPanel.setPreferredSize(new Dimension(250, 0));
 
-        // Panel colors
-        cardPanel.setBackground(Color.WHITE);
+        // Set border panel colors
         northPanel.setBackground(Color.BLUE);
         southPanel.setBackground(Color.RED);
         eastPanel.setBackground(Color.GREEN);
@@ -40,6 +41,10 @@ public class FlashcardFrame extends JFrame
         this.add(southPanel, BorderLayout.SOUTH);
         this.add(eastPanel, BorderLayout.EAST);
         this.add(westPanel, BorderLayout.WEST);
+
+        this.setVisible(true);
+
+
 
 
     }
