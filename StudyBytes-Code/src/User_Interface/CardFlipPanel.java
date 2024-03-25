@@ -23,10 +23,13 @@ public class CardFlipPanel extends JPanel implements ActionListener
 
         // Set attributes of panel
         this.setLayout(new BorderLayout());    // Will be useful later for adding a label to this panel
+        this.setBackground(Color.WHITE);
 
         // Set attributes of flipButton
         flipButton = new JButton();;
-        flipButton.setBorder(cardBorder);     // Make button border invisible
+//        flipButton.setBorder(cardBorder);     // Make button border invisible
+//        this.setBorder(cardBorder);
+        flipButton.setBackground(Color.RED);
         flipButton.addActionListener(this);
 
         // Set initial text on card (initially term)
