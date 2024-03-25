@@ -14,12 +14,13 @@ public class TestData
      */
     public TestData()
     {
-        studySet = new TestDataStructure[4];
+        studySet = new TestDataStructure[5];
 
         studySet[0] = new TestDataStructure("pamphlet", "a small booklet or leaflet containing information or arguments about a single subject");
         studySet[1] = new TestDataStructure("love", "an intense feeling of deep affection");
         studySet[2] = new TestDataStructure("insanity", "the state of being seriously mentally ill; madness");
         studySet[3] = new TestDataStructure("ewe", "a female sheep, especially when fully mature");
+        studySet[4] = new TestDataStructure("game", "a form of play or sport, especially a competitive one played according to rules and decided by skill, strength, or luck");
 
     }
 
