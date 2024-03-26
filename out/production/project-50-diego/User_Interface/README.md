@@ -1,1 +1,0 @@
-This is the package that will store all front-end files. 
