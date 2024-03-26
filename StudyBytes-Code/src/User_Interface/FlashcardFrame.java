@@ -36,10 +36,8 @@ public class FlashcardFrame extends JFrame
 
         // Set border panel colors
         northPanel.setBackground(Color.WHITE);
-<<<<<<< HEAD
-=======
+        
         southPanel.setBackground(Color.WHITE);
->>>>>>> main
         eastPanel.setBackground(Color.WHITE);
         westPanel.setBackground(Color.WHITE);
 
