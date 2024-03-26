@@ -11,7 +11,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
     private JButton flipButton;     // Button to "flip" flashcard
     private boolean termDisplayed;  // True if term displayed, false if definition displayed
     private TestDataStructure data;          // Data set to use for text display
-    private TestDataStructure deck[];
+    private TestDataStructure[] deck;   // Deck of terms and definitions
     private int currCardIndex;      // Tracks the index of the current card on display
     private boolean prevButtonEnabled;
     private boolean nextButtonEnabled;

@@ -20,6 +20,7 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
     private CardFlipPanel cardPanel;
 
     private Border buttonBorder;    // Border for buttons
+    private IndexLabel label;       // Label to display current card index and total number of cards
 
     public FlashcardSouthPanel(CardFlipPanel centerPanel)
     {
@@ -30,6 +31,7 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         buttonBorder = BorderFactory.createEtchedBorder();
 
         // Set attributes for frame
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));   // Flowlayout with 15 pixels of space between elements and 10 pixels of space between elements and top of panel
         this.setPreferredSize(new Dimension(0, 150));
         this.setBackground(Color.WHITE);
 
@@ -56,8 +58,12 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         // Set "Prev" button initially disabled
         prevButton.setEnabled(false);
 
-        // Add buttons to frame
+        // Create label to display index of current card
+        label = new IndexLabel(cardPanel);
+
+        // Add buttons and label to frame
         this.add(prevButton);
+        this.add(label);
         this.add(nextButton);
 
     }
@@ -80,6 +86,8 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
             {   // Ensure prev button is enabled
                 prevButton.setEnabled(true);
             }
+
+            label.updateCurrCard();     // Update label text
         }
 
         if (e.getSource() == nextButton)
@@ -96,6 +104,8 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
             {   // Ensure next button is enabled
                 nextButton.setEnabled(true);
             }
+
+            label.updateCurrCard();     // Update label text
         }
     }
 }
