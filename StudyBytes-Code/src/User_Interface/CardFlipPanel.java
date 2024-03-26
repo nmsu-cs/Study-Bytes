@@ -37,8 +37,6 @@ public class CardFlipPanel extends JPanel implements ActionListener
         // Set contents of deck
         TestData dataSet = new TestData();
         deck = dataSet.studySet;
-        flipButton.addActionListener(this);
-
 
         // Set initial text on card (initially term)
         currCardIndex = 0;
