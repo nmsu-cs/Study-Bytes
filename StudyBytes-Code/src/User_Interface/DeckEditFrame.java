@@ -8,7 +8,7 @@ public class DeckEditFrame extends JFrame
      * This class sets up the frame for the deck editor screen
      */
 
-    public DeckEditFrame()
+    public DeckEditFrame(TestData deck)
     {
         // Set up frame
         this.setTitle("Study Bytes");
@@ -16,7 +16,7 @@ public class DeckEditFrame extends JFrame
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Create panel to fill entire frame
-        DeckEditPanel panel = new DeckEditPanel();
+        DeckEditPanel panel = new DeckEditPanel(deck);
 
         // Create JScrollPane for deck edit panel and add it to frame
         JScrollPane scrollPane = new JScrollPane(panel);
