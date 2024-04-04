@@ -6,7 +6,7 @@ public class LaunchProgram
     {
         TestData deck = new TestData();
 
-//        FlashcardFrame frame1 = new FlashcardFrame();  // Frame for deck viewer screen
-        DeckEditFrame frame2 = new DeckEditFrame(deck);  // Frame for deck edit screen
+        LaunchFrame frame1 = new LaunchFrame(deck);  // Frame for deck viewer screen
+        //DeckEditFrame frame2 = new DeckEditFrame(deck);  // Frame for deck edit screen
     }
 }
