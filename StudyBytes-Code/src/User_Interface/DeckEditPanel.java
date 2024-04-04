@@ -14,6 +14,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
     private GridBagConstraints constraints;  // GridBagConstraints object
     private JButton saveButton;              // Button to save changes to deck
+    private JButton addButton;               // Button to add a new card to deck
 
     TestData deck;                           // Deck of cards, with each card containing a term and a definition
 
@@ -31,7 +32,6 @@ public class DeckEditPanel extends JPanel implements ActionListener
         {
             constraints.gridx = 0;
             constraints.gridy = i + 1;
-            constraints.gridwidth = 2;
             constraints.insets = new Insets(25, 0, 25, 0);
             this.add(new CardEditPanel(deck.studySet[i]), constraints);
         }
@@ -41,14 +41,25 @@ public class DeckEditPanel extends JPanel implements ActionListener
         saveButton.addActionListener(this);
 
         // Set save button attributes
-        constraints.gridx = 1;
+        constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 1;
         constraints.anchor = GridBagConstraints.LINE_END;
         constraints.insets = new Insets(25, 0, 0, 0);
         saveButton.setPreferredSize(new Dimension(200, 40));
 
         this.add(saveButton, constraints);  // Add save button to panel
+
+        // Create add button
+        addButton = new JButton("New Card");
+        addButton.addActionListener(this);
+
+//        // Set add button attributes
+//        constraints.gridx = ;
+//        constraints.gridy = 0;
+//        constraints.gridwidth = 1;
+//        constraints.anchor = GridBagConstraints.LINE_END;
+//        constraints.insets = new Insets(25, 0, 0, 0);
+//        saveButton.setPreferredSize(new Dimension(200, 40));
     }
 
     @Override
