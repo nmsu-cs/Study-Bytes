@@ -1,40 +1,57 @@
 package Backend;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeckManager {
-    private List<Deck> decks;
-    private int selectedDeckIndex;
+    private ArrayList<Deck> decks; // List to store decks
+    private int selectedDeckIndex; // Index of the selected deck
 
-    public DeckManager(List<Deck> decks) {
-        this.decks = decks;
-        this.selectedDeckIndex = 0;
+
+    // TODO: Integrate Front-End GUI to Back-End
+
+    public DeckManager() {
+
     }
 
-    public void start() {
+    public void start() throws IOException {
+        // Starts CSV processes
+        CSVHandler csvHandler = new CSVHandler();
+        String csv_path = "StudyBytes-Code/src/Backend/decks_csv";
+        List<File> csvFiles = csvHandler.findCSVFiles(csv_path);
+        decks = csvHandler.processCSVFiles(csvFiles); // Process CSV files and populate decks list
+
+        // Test writing to CSV file
+        testWrite(csvHandler);
+
+        // Main terminal UI loop
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             char input;
-            printDecks();
+            printDecks(); // Print the list of decks
+            selectedDeckIndex = 0;
             while ((input = (char) reader.read()) != 'q') { // 'q' to quit
                 {
-
+                    // Handle user input
                     switch (input) {
-                        case 'e': // select previous
+                        case 'e': // Select previous deck
                             selectPreviousDeck();
                             break;
-                        case 'r': // select next
+                        case 'r': // Select next deck
                             selectNextDeck();
                             break;
-                        case 'v': // view cards in deck
+                        case 'v': // View cards in deck
                             viewDeck(decks.get(selectedDeckIndex));
                             break;
-                        case 'c': // show deck list
+                        case 'c': // Show deck list
                             printDecks();
+                            break;
                         default:
+                            // Handle invalid input
+
+                       // TODO: Add input for creating a new deck
+                       // TODO: Add input for adding/removing cards to an existing deck
+
                     }
                 }
             }
@@ -43,25 +60,19 @@ public class DeckManager {
         }
     }
 
-    private static List<Deck> createSample(){
-        List<Deck> decks = new ArrayList<>();
+    // Method to test writing to CSV file
+    private void testWrite(CSVHandler csvHandler) throws IOException {
+        // Create a test deck
+        Deck test_write_deck = new Deck("Test Deck");
+        test_write_deck.addCard("Cabbage", "Vegetable");
+        test_write_deck.addCard("Apple", "Fruit");
+        test_write_deck.addCard("Pear", "Fruit");
 
-        Deck deck1 = new Deck("Portal Cards");
-        decks.add(deck1);
-
-        deck1.addCard(new Card("Cave Johnson", "Aperture Science Founder"));
-        deck1.addCard(new Card("GLaDOS","Genetic Lifeform and Disk Operating System"));
-        deck1.addCard(new Card("Chell","Test Subject"));
-
-
-        Deck deck2 = new Deck("Half-Life Cards");
-        decks.add(deck2);
-
-        deck2.addCard(new Card("Gordon Freeman","Black Mesa Scientist"));
-
-        return decks;
+        // Write the test deck to CSV file
+        csvHandler.writeCSVFiles(test_write_deck);
     }
 
+    // Method to print the list of decks
     private void printDecks() {
         System.out.println("Select a deck:");
         for (int i = 0; i < decks.size(); i++) {
@@ -71,17 +82,19 @@ public class DeckManager {
         printControls();
     }
 
+    // Method to print control options
     private void printControls() {
         System.out.print("________________________________________________________________________________________________");
         System.out.println("\n 'q' to quit | 'e' to select prev. | 'r' to select next |" +
                 " 'v' to view deck | 'c' to show decks ");
     }
 
-    private void viewDeck(Deck deck){
-
+    // Method to view cards in a deck
+    private void viewDeck(Deck deck) {
         System.out.println("Deck Title: " + deck.getTitle() + "\n");
 
-        for(Card currentCard : deck.getDeck()){
+        // Print each card in the deck
+        for (Card currentCard : deck.getDeck()) {
             System.out.println(currentCard.toString());
             System.out.println();
         }
@@ -89,24 +102,15 @@ public class DeckManager {
         printControls();
     }
 
+    // Method to select the next deck
     private void selectNextDeck() {
         selectedDeckIndex = (selectedDeckIndex + 1) % decks.size();
         printDecks();
     }
 
+    // Method to select the previous deck
     private void selectPreviousDeck() {
         selectedDeckIndex = (selectedDeckIndex - 1 + decks.size()) % decks.size();
         printDecks();
-    }
-
-
-
-    public static void main(String[] args) {
-        // Create sample decks
-        List<Deck> decks = createSample();
-
-        // Start Terminal UI
-        DeckManager terminalUI = new DeckManager(decks);
-        terminalUI.start();
     }
 }
