@@ -17,6 +17,15 @@ public class Deck {
         deck.add(card);
     }
 
+    public void addCard(String term, String definition){
+        Card card = new Card(term, definition);
+        deck.add(card);
+    }
+
+    public void removeCard(Card card){
+        deck.remove(card);
+    }
+
 
     public String getTitle() {
         return title;
