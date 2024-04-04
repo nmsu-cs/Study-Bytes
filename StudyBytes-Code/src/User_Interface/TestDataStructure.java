@@ -16,3 +16,4 @@ public class TestDataStructure
         this.definition = definition;
     }
 }
+
