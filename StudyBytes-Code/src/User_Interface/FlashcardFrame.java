@@ -11,7 +11,6 @@ public class FlashcardFrame extends JFrame
         this.setTitle("Study Bytes");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setSize(500, 500);
         this.setLayout(new BorderLayout(10, 10));   // Frame has border layout with space of ten pixels between panels
 
         // Get the content pane and set its background color (for the color between panels)
@@ -36,7 +35,7 @@ public class FlashcardFrame extends JFrame
 
         // Set border panel colors
         northPanel.setBackground(Color.WHITE);
-        
+
         southPanel.setBackground(Color.WHITE);
         eastPanel.setBackground(Color.WHITE);
         westPanel.setBackground(Color.WHITE);
@@ -55,3 +54,4 @@ public class FlashcardFrame extends JFrame
 
     }
 }
+

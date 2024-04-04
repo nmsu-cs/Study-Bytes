@@ -4,6 +4,9 @@ public class LaunchProgram
 {
     public static void main(String[] args)
     {
-        FlashcardFrame frame = new FlashcardFrame();
+        TestData deck = new TestData();
+
+//        FlashcardFrame frame1 = new FlashcardFrame();  // Frame for deck viewer screen
+        DeckEditFrame frame2 = new DeckEditFrame(deck);  // Frame for deck edit screen
     }
 }

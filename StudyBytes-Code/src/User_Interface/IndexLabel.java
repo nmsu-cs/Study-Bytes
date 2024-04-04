@@ -40,6 +40,4 @@ public class IndexLabel extends JLabel
         currCard = centerPanel.getCurrCardIndex() + 1;
         this.setText(buildLabelString());
     }
-
-
 }
