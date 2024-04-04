@@ -16,19 +16,13 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
     private JButton prevButton;
     private JButton nextButton;
 
-    // Flashcard panel for this frame
-    private CardFlipPanel cardPanel;
-
-    private Border buttonBorder;    // Border for buttons
-    private IndexLabel label;       // Label to display current card index and total number of cards
+    private CardFlipPanel cardPanel;   // Flashcard panel for this frame
+    private IndexLabel label;          // Label to display current card index and total number of cards
 
     public FlashcardSouthPanel(CardFlipPanel centerPanel)
     {
         // Define cardPanel object
         cardPanel = centerPanel;
-
-        // Create button border
-        buttonBorder = BorderFactory.createEtchedBorder();
 
         // Set attributes for frame
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));   // Flowlayout with 15 pixels of space between elements and 10 pixels of space between elements and top of panel
@@ -46,10 +40,6 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         // Add "Prev" and "Next" labels to buttons
         prevButton.setText("Prev");
         nextButton.setText("Next");
-
-        // Add border to buttons
-        prevButton.setBorder(buttonBorder);
-        nextButton.setBorder(buttonBorder);
 
         // Add action listeners to buttons
         prevButton.addActionListener(this);
