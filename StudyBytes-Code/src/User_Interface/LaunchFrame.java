@@ -39,7 +39,7 @@ public class LaunchFrame extends JFrame implements ActionListener {
             DeckEditFrame spawnEdit = new DeckEditFrame(deck);
         }else if(e.getSource() == viewButton){
             this.dispose();
-            FlashcardFrame spawnViewFlash = new FlashcardFrame();
+            FlashcardFrame spawnViewFlash = new FlashcardFrame(deck);
         }
     }
 }

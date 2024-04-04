@@ -12,17 +12,18 @@ public class CardFlipPanel extends JPanel implements ActionListener
      * This class sets up the center panel for FlashcardFrame.
      * An instance of this class is a flippable flashcard.
      */
-
+    private TestData deck;          // Deck data object
     private JButton flipButton;     // Button to "flip" flashcard
     private boolean termDisplayed;  // True if term displayed, false if definition displayed
-    private TestDataStructure data;          // Data set to use for text display
-    private TestDataStructure[] deck;   // Deck of terms and definitions
+    private TestDataStructure data; // Data set to use for text display
     private int currCardIndex;      // Tracks the index of the current card on display
     private boolean prevButtonEnabled;
     private boolean nextButtonEnabled;
 
-    public CardFlipPanel()
+    public CardFlipPanel(TestData deck)
     {
+        this.deck = deck;
+
         Border cardBorder = BorderFactory.createEtchedBorder();    // Border for card
 
         // Set attributes of panel
@@ -34,13 +35,9 @@ public class CardFlipPanel extends JPanel implements ActionListener
         flipButton.setBorder(cardBorder);       // Set card border
         flipButton.addActionListener(this);  // Add action listener to card button
 
-        // Set contents of deck
-        TestData dataSet = new TestData();
-        deck = dataSet.studySet;
-
         // Set initial text on card (initially term)
         currCardIndex = 0;
-        data = deck[0];
+        data = deck.studySet[0];
         termDisplayed = true;
         flipButton.setText(data.term);
 
@@ -66,7 +63,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
      */
     public int getMaxIndex()
     {
-        return deck.length - 1;
+        return deck.studySet.length - 1;
     }
 
     /**
@@ -75,7 +72,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
     public void prevCard()
     {
         termDisplayed = true;
-        data = deck[--currCardIndex];       // Set card data to card in previous index in array and update currIndex
+        data = deck.studySet[--currCardIndex];       // Set card data to card in previous index in array and update currIndex
         flipButton.setText(data.term);      // Display new text
     }
 
@@ -85,7 +82,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
     public void nextCard()
     {
         termDisplayed = true;
-        data = deck[++currCardIndex];       // Set card data to card in next index in array and update currIndex
+        data = deck.studySet[++currCardIndex];       // Set card data to card in next index in array and update currIndex
         flipButton.setText(data.term);      // Display new text
     }
 
