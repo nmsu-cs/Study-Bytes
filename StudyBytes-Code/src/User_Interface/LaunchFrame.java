@@ -1,5 +1,7 @@
 package User_Interface;
 
+import Backend.Deck;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,9 +10,9 @@ public class LaunchFrame extends JFrame implements ActionListener {
     JButton editButton;
     JButton viewButton;
 
-    TestData deck;
-    public LaunchFrame(TestData deck){
-        this.deck = deck;
+    Deck linkedDeck;
+    public LaunchFrame(Deck linkedDeck){
+        this.linkedDeck = linkedDeck;
 
         editButton = new JButton();
         editButton.setBounds(200,100,50,50);
@@ -33,7 +35,7 @@ public class LaunchFrame extends JFrame implements ActionListener {
         this.add(editButton);
         this.add(viewButton);
 
-        if (deck.studySet.size() == 0)
+        if (linkedDeck.getDeck().size() == 0)
         {   // Deck is empty, remove viewButton functionality
             viewButton.setEnabled(false);
         }
@@ -41,10 +43,10 @@ public class LaunchFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == editButton){
             this.dispose();
-            DeckEditFrame spawnEdit = new DeckEditFrame(deck);
+            DeckEditFrame spawnEdit = new DeckEditFrame(linkedDeck);
         }else if(e.getSource() == viewButton){
             this.dispose();
-            FlashcardFrame spawnViewFlash = new FlashcardFrame(deck);
+            FlashcardFrame spawnViewFlash = new FlashcardFrame(linkedDeck);
         }
     }
 }
