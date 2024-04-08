@@ -17,7 +17,7 @@ public class FlashcardLabel extends JLabel
         this.setHorizontalAlignment(CENTER);    // Center text on label
         this.setBorder(cardBorder);             // Add border to card label
         TestData data = new TestData();
-        this.setText(data.studySet[0].term);
+        this.setText(data.studySet.get(0).term);
 
 
     }

@@ -37,7 +37,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
 
         // Set initial text on card (initially term)
         currCardIndex = 0;
-        data = deck.studySet[0];
+        data = deck.studySet.get(0);
         termDisplayed = true;
         flipButton.setText(data.term);
 
@@ -63,7 +63,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
      */
     public int getMaxIndex()
     {
-        return deck.studySet.length - 1;
+        return deck.studySet.size() - 1;
     }
 
     /**
@@ -72,7 +72,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
     public void prevCard()
     {
         termDisplayed = true;
-        data = deck.studySet[--currCardIndex];       // Set card data to card in previous index in array and update currIndex
+        data = deck.studySet.get(--currCardIndex);       // Set card data to card in previous index in array and update currIndex
         flipButton.setText(data.term);      // Display new text
     }
 
@@ -82,7 +82,7 @@ public class CardFlipPanel extends JPanel implements ActionListener
     public void nextCard()
     {
         termDisplayed = true;
-        data = deck.studySet[++currCardIndex];       // Set card data to card in next index in array and update currIndex
+        data = deck.studySet.get(++currCardIndex);       // Set card data to card in next index in array and update currIndex
         flipButton.setText(data.term);      // Display new text
     }
 
