@@ -1,5 +1,7 @@
 package User_Interface;
 
+import Backend.Card;
+import Backend.Deck;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -16,11 +18,11 @@ public class DeckEditPanel extends JPanel implements ActionListener
     private JButton saveButton;              // Button to save changes to deck
     private JButton addButton;               // Button to add a new card to deck
 
-    TestData deck;                           // Deck of cards, with each card containing a term and a definition
+    Deck linkedDeck;                         // Deck of cards, with each card containing a term and a definition
 
-    public DeckEditPanel(TestData deck)
+    public DeckEditPanel(Deck linkedDeck)
     {
-        this.deck = deck;
+        this.linkedDeck = linkedDeck;
 
         // Set up panel attributes
         this.setBackground(Color.WHITE);
@@ -28,12 +30,12 @@ public class DeckEditPanel extends JPanel implements ActionListener
         constraints = new GridBagConstraints();     // Create GridBagConstraints object
 
         // Add card edit panels to this panel
-        for (int i = 0; i < deck.studySet.size(); ++i)
+        for (int i = 0; i < linkedDeck.getDeck().size(); ++i)
         {
             constraints.gridx = 0;
             constraints.gridy = i + 1;
             constraints.insets = new Insets(25, 0, 25, 0);
-            this.add(new CardEditPanel(deck.studySet.get(i), this), constraints);
+            this.add(new CardEditPanel(linkedDeck.getDeck().get(i), this), constraints);
         }
 
         // Create save button
@@ -55,7 +57,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
         // Set add button attributes
         constraints.gridx = 0;
-        constraints.gridy = deck.studySet.size() + 1;
+        constraints.gridy = linkedDeck.getDeck().size() + 1;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(0, 0, 25, 0);
         addButton.setPreferredSize(new Dimension(300, 40));
@@ -69,9 +71,9 @@ public class DeckEditPanel extends JPanel implements ActionListener
      * @param card card to remove from deck
      * @param panel panel that contains card's data
      */
-    public void deleteCard(TestDataStructure card, CardEditPanel panel)
+    public void deleteCard(Card card, CardEditPanel panel)
     {
-        deck.studySet.remove(card);
+        linkedDeck.getDeck().remove(card);
         this.remove(panel);
     }
 
@@ -80,24 +82,24 @@ public class DeckEditPanel extends JPanel implements ActionListener
     {
         if (e.getSource() == saveButton)
         {   // Save button clicked, save attributes of deck object to database
-            for (int i = 0; i < deck.studySet.size(); ++i)
+            for (int i = 0; i < linkedDeck.getDeck().size(); ++i)
             {
-                System.out.println(deck.studySet.get(i).term + ": " + deck.studySet.get(i).definition);
+                System.out.println(linkedDeck.getDeck().get(i).getTerm() + ": " + linkedDeck.getDeck().get(i).getDefinition());
             }
         }
 
         if (e.getSource() == addButton)
         {   // Add button clicked, create new card panel
             constraints.gridx = 0;
-            constraints.gridy = deck.studySet.size() + 1;
+            constraints.gridy = linkedDeck.getDeck().size() + 1;
             constraints.insets = new Insets(25, 0, 25, 0);
-            deck.studySet.add(new TestDataStructure("", ""));   // Add empty card to deck
-            this.add(new CardEditPanel(deck.studySet.get(deck.studySet.size() - 1), this), constraints);
+            linkedDeck.getDeck().add(new Card("", ""));   // Add empty card to deck
+            this.add(new CardEditPanel(linkedDeck.getDeck().get(linkedDeck.getDeck().size() - 1), this), constraints);
 
             // Move down add button
             this.remove(addButton);
             constraints.gridx = 0;
-            constraints.gridy = deck.studySet.size() + 1;
+            constraints.gridy = linkedDeck.getDeck().size() + 1;
             constraints.anchor = GridBagConstraints.CENTER;
             constraints.insets = new Insets(0, 0, 25, 0);
             this.add(addButton, constraints);

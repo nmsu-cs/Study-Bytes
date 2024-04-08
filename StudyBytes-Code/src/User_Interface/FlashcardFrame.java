@@ -1,15 +1,17 @@
 package User_Interface;
 
+import Backend.Deck;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class FlashcardFrame extends JFrame
 {
-    private TestData deck;  // Deck data object
+    private Deck linkedDeck;  // Deck data object
 
-    public FlashcardFrame(TestData deck)
+    public FlashcardFrame(Deck linkedDeck)
     {
-        this.deck = deck;
+        this.linkedDeck = linkedDeck;
 
         // Set up frame
         this.setTitle("Study Bytes");
@@ -22,7 +24,7 @@ public class FlashcardFrame extends JFrame
         contentPane.setBackground(Color.WHITE);
 
         // Create main panel
-        CardFlipPanel cardPanel = new CardFlipPanel(deck);    // Panel to display flashcards
+        CardFlipPanel cardPanel = new CardFlipPanel(this.linkedDeck);    // Panel to display flashcards
 
         // Create south panel
         FlashcardSouthPanel southPanel = new FlashcardSouthPanel(cardPanel);     // Panel containing buttons to flip through cards
@@ -52,9 +54,6 @@ public class FlashcardFrame extends JFrame
         this.add(westPanel, BorderLayout.WEST);
 
         this.setVisible(true);  // Make frame visible
-
-
-
 
     }
 }

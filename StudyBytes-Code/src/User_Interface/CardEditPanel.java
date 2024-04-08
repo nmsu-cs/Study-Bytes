@@ -1,5 +1,6 @@
 package User_Interface;
 
+import Backend.Card;
 import Backend.Deck;
 
 import javax.swing.*;
@@ -21,10 +22,10 @@ public class CardEditPanel extends JPanel implements ActionListener
     private JButton editButton;               // Button to update contents of card
     private JButton deleteButton;             // Button to delete card from deck
 
-    TestDataStructure card;  // Card attributes for the text fields for this card
+    Card card;  // Card attributes for the text fields for this card
     DeckEditPanel editPage;  // Deck edit panel, used to call deleteCard() method in DeckEditPanel instance
 
-    public CardEditPanel(TestDataStructure card, DeckEditPanel editPage)
+    public CardEditPanel(Card card, DeckEditPanel editPage)
     {
         this.card = card;
         this.editPage = editPage;
@@ -38,8 +39,8 @@ public class CardEditPanel extends JPanel implements ActionListener
         this.setBackground(Color.WHITE);
 
         // Create text fields for cards
-        termField = new JTextArea(this.card.term);
-        definitionField = new JTextArea(this.card.definition);
+        termField = new JTextArea(this.card.getTerm());
+        definitionField = new JTextArea(this.card.getDefinition());
 
         // Constraints for termField
         constraints.gridx = 0;
@@ -100,8 +101,8 @@ public class CardEditPanel extends JPanel implements ActionListener
     {
         if (e.getSource() == editButton)
         {   // Edit button clicked, update card attributes
-            card.term = termField.getText();
-            card.definition = definitionField.getText();
+            card.setTerm(termField.getText());
+            card.setDefinition(definitionField.getText());
         }
 
         if (e.getSource() == deleteButton)
