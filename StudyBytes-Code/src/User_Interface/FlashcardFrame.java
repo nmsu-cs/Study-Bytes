@@ -5,8 +5,12 @@ import java.awt.*;
 
 public class FlashcardFrame extends JFrame
 {
-    public FlashcardFrame()
+    private TestData deck;  // Deck data object
+
+    public FlashcardFrame(TestData deck)
     {
+        this.deck = deck;
+
         // Set up frame
         this.setTitle("Study Bytes");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -18,7 +22,7 @@ public class FlashcardFrame extends JFrame
         contentPane.setBackground(Color.WHITE);
 
         // Create main panel
-        CardFlipPanel cardPanel = new CardFlipPanel();    // Panel to display flashcards
+        CardFlipPanel cardPanel = new CardFlipPanel(deck);    // Panel to display flashcards
 
         // Create south panel
         FlashcardSouthPanel southPanel = new FlashcardSouthPanel(cardPanel);     // Panel containing buttons to flip through cards

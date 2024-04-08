@@ -32,6 +32,11 @@ public class LaunchFrame extends JFrame implements ActionListener {
 
         this.add(editButton);
         this.add(viewButton);
+
+        if (deck.studySet.size() == 0)
+        {   // Deck is empty, remove viewButton functionality
+            viewButton.setEnabled(false);
+        }
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == editButton){
@@ -39,7 +44,7 @@ public class LaunchFrame extends JFrame implements ActionListener {
             DeckEditFrame spawnEdit = new DeckEditFrame(deck);
         }else if(e.getSource() == viewButton){
             this.dispose();
-            FlashcardFrame spawnViewFlash = new FlashcardFrame();
+            FlashcardFrame spawnViewFlash = new FlashcardFrame(deck);
         }
     }
 }
