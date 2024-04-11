@@ -26,7 +26,6 @@ public class Deck {
         deck.remove(card);
     }
 
-
     public String getTitle() {
         return title;
     }
