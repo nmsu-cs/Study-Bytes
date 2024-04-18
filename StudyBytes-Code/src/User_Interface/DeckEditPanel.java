@@ -2,6 +2,8 @@ package User_Interface;
 
 import Backend.Card;
 import Backend.Deck;
+
+import javax.security.auth.callback.LanguageCallback;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -16,8 +18,9 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
     private GridBagConstraints constraints;  // GridBagConstraints object
     private JButton saveButton;              // Button to save changes to deck
-    private JButton addButton;               // Button to add a new card to deck
+    private JButton addButton;// Button to add a new card to deck
 
+    private JButton backButton;
     Deck linkedDeck;                         // Deck of cards, with each card containing a term and a definition
 
     public DeckEditPanel(Deck linkedDeck)
@@ -43,7 +46,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
         saveButton.addActionListener(this);
 
         // Set save button attributes
-        constraints.gridx = 0;
+        constraints.gridx = 2;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_END;
         constraints.insets = new Insets(25, 0, 0, 0);
@@ -63,6 +66,18 @@ public class DeckEditPanel extends JPanel implements ActionListener
         addButton.setPreferredSize(new Dimension(300, 40));
 
         this.add(addButton, constraints);
+
+        backButton = new JButton("<-");
+        backButton.addActionListener(this);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.anchor = GridBagConstraints.LINE_END;
+        constraints.insets = new Insets(25, 0, 0, 0);
+        backButton.setPreferredSize(new Dimension(40, 40));
+
+        this.add(backButton, constraints);
+
     }
 
     /**
@@ -103,6 +118,11 @@ public class DeckEditPanel extends JPanel implements ActionListener
             constraints.anchor = GridBagConstraints.CENTER;
             constraints.insets = new Insets(0, 0, 25, 0);
             this.add(addButton, constraints);
+        }
+
+        if(e.getSource() == backButton){
+            this.setVisible(false);
+            LaunchFrame launch = new LaunchFrame(linkedDeck);
         }
     }
 }
