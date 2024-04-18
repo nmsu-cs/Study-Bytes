@@ -4,10 +4,14 @@ import Backend.Deck;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FlashcardFrame extends JFrame
+public class FlashcardFrame extends JFrame implements ActionListener
 {
     private Deck linkedDeck;  // Deck data object
+
+    private JButton backButton;
 
     public FlashcardFrame(Deck linkedDeck)
     {
@@ -22,6 +26,12 @@ public class FlashcardFrame extends JFrame
         // Get the content pane and set its background color (for the color between panels)
         Container contentPane = getContentPane();
         contentPane.setBackground(Color.WHITE);
+
+        backButton = new JButton("<-");
+        backButton.addActionListener(this);
+        backButton.setPreferredSize(new Dimension(40, 40));
+        this.add(backButton);
+
 
         // Create main panel
         CardFlipPanel cardPanel = new CardFlipPanel(this.linkedDeck);    // Panel to display flashcards
@@ -55,6 +65,12 @@ public class FlashcardFrame extends JFrame
 
         this.setVisible(true);  // Make frame visible
 
+    }
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == backButton){
+            this.setVisible(false);
+            LaunchFrame launch = new LaunchFrame(linkedDeck);
+        }
     }
 }
 

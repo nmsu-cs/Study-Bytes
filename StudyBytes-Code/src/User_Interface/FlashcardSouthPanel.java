@@ -33,6 +33,7 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         prevButton = new JButton();
         nextButton = new JButton();
 
+
         // Set button sizes
         prevButton.setPreferredSize(new Dimension(300,100));
         nextButton.setPreferredSize(new Dimension(300, 100));
@@ -45,6 +46,7 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         prevButton.addActionListener(this);
         nextButton.addActionListener(this);
 
+
         // Set "Prev" button initially disabled
         prevButton.setEnabled(false);
 
@@ -55,7 +57,6 @@ public class FlashcardSouthPanel extends JPanel implements ActionListener
         this.add(prevButton);
         this.add(label);
         this.add(nextButton);
-
     }
 
     @Override
