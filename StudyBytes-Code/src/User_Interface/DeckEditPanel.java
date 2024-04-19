@@ -46,7 +46,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
         saveButton.addActionListener(this);
 
         // Set save button attributes
-        constraints.gridx = 2;
+        constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_END;
         constraints.insets = new Insets(25, 0, 0, 0);
@@ -72,7 +72,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.anchor = GridBagConstraints.LINE_END;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(25, 0, 0, 0);
         backButton.setPreferredSize(new Dimension(40, 40));
 
