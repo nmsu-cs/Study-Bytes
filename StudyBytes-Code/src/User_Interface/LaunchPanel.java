@@ -1,5 +1,6 @@
 package User_Interface;
 
+import Backend.CSVHandler;
 import Backend.Card;
 import Backend.Deck;
 
@@ -13,6 +14,8 @@ public class LaunchPanel extends JPanel implements ActionListener
 {
     private Deck linkedDeck;
     private LaunchFrame frame;                // Frame this panel exits in
+    private CSVHandler csvHandler;
+
     private GridBagConstraints constraints;   // GridBagConstraints object to modify constraints
     private JTextArea termField;              // Text field for card term
     private JTextArea definitionField;        // Text field for card definition
@@ -20,9 +23,10 @@ public class LaunchPanel extends JPanel implements ActionListener
     private JButton editButton;
     private JButton viewButton;
 
-    public LaunchPanel(Deck linkedDeck, LaunchFrame frame){
+    public LaunchPanel(Deck linkedDeck, LaunchFrame frame, CSVHandler csvHandler){
         this.linkedDeck = linkedDeck;
         this.frame = frame;
+        this.csvHandler = csvHandler;
 
 
         this.setBackground(Color.WHITE);
@@ -50,10 +54,10 @@ public class LaunchPanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == editButton){
             frame.dispose();
-            DeckEditFrame edit = new DeckEditFrame(linkedDeck);
+            DeckEditFrame edit = new DeckEditFrame(linkedDeck, csvHandler);
         }else if(e.getSource() == viewButton){
             frame.dispose();
-            FlashcardFrame view = new FlashcardFrame(linkedDeck);
+            FlashcardFrame view = new FlashcardFrame(linkedDeck, csvHandler);
         }
     }
 

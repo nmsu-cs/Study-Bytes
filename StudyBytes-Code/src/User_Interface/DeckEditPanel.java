@@ -1,5 +1,6 @@
 package User_Interface;
 
+import Backend.CSVHandler;
 import Backend.Card;
 import Backend.Deck;
 
@@ -9,6 +10,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class DeckEditPanel extends JPanel implements ActionListener
 {
@@ -22,10 +24,12 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
     private JButton backButton;
     Deck linkedDeck;                         // Deck of cards, with each card containing a term and a definition
+    CSVHandler csvHandler;
 
-    public DeckEditPanel(Deck linkedDeck)
+    public DeckEditPanel(Deck linkedDeck, CSVHandler csvHandler)
     {
         this.linkedDeck = linkedDeck;
+        this.csvHandler = csvHandler;
 
         // Set up panel attributes
         this.setBackground(Color.WHITE);
@@ -97,9 +101,10 @@ public class DeckEditPanel extends JPanel implements ActionListener
     {
         if (e.getSource() == saveButton)
         {   // Save button clicked, save attributes of deck object to database
-            for (int i = 0; i < linkedDeck.getDeck().size(); ++i)
-            {
-                System.out.println(linkedDeck.getDeck().get(i).getTerm() + ": " + linkedDeck.getDeck().get(i).getDefinition());
+            try {
+                csvHandler.writeCSVFiles(linkedDeck);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }
 
@@ -122,7 +127,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
         if(e.getSource() == backButton){
             this.setVisible(false);
-            LaunchFrame launch = new LaunchFrame(linkedDeck);
+            LaunchFrame launch = new LaunchFrame(linkedDeck, csvHandler);
         }
     }
 }

@@ -1,5 +1,6 @@
 package User_Interface;
 
+import Backend.CSVHandler;
 import Backend.Deck;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class FlashcardFrame extends JFrame
     private JButton backButton;
     FlashcardPanel panel;
 
-    public FlashcardFrame(Deck linkedDeck)
+    public FlashcardFrame(Deck linkedDeck, CSVHandler csvHandler)
     {
         this.linkedDeck = linkedDeck;
 
@@ -24,7 +25,7 @@ public class FlashcardFrame extends JFrame
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Create and add flashcard panel
-        panel = new FlashcardPanel(linkedDeck, this);
+        panel = new FlashcardPanel(linkedDeck, this, csvHandler);
         this.add(panel);
 
         this.setVisible(true);  // Make frame visible

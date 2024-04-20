@@ -1,5 +1,6 @@
 package User_Interface;
 
+import Backend.CSVHandler;
 import Backend.Card;
 import Backend.Deck;
 
@@ -16,6 +17,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
 
     Deck linkedDeck;                 // Current deck being used
     FlashcardFrame frame;            // Frame that this panel is placed in
+    CSVHandler csvHandler;
 
     GridBagConstraints constraints;  // Constraints object
     JButton flashcard;               // Flashcard button to flip
@@ -30,10 +32,11 @@ public class FlashcardPanel extends JPanel implements ActionListener
     int currIndex;                   // Index of the current card being displayed (starting at 1)
     int totalCards;                  // Number of cards in the deck
 
-    public FlashcardPanel(Deck linkedDeck, FlashcardFrame frame)
+    public FlashcardPanel(Deck linkedDeck, FlashcardFrame frame, CSVHandler csvHandler)
     {
         this.linkedDeck = linkedDeck;
         this.frame = frame;
+        this.csvHandler = csvHandler;
 
         // Set up panel attributes
         this.setLayout(new GridBagLayout());
@@ -141,7 +144,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
         if (e.getSource() == backButton)
         {   // Back button clicked, return to launch screen
             frame.dispose();
-            LaunchFrame launchFrame = new LaunchFrame(linkedDeck);
+            LaunchFrame launchFrame = new LaunchFrame(linkedDeck, csvHandler);
         }
 
         if (e.getSource() == flashcard)
