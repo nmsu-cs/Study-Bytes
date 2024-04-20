@@ -12,7 +12,7 @@ public class LaunchProgram
     public static void main(String[] args) throws IOException {
         CSVHandler csvHandler = new CSVHandler();
         List<File> csvFiles = new ArrayList<>();
-        String csv_path = "StudyBytes-Code/src/Backend/decks_csv";
+        String csv_path = "StudyBytes-Code/src/Backend/decks_csv/data.csv";
         csvHandler.setDirectoryPath(csv_path);
         File dataFilePath = new File("StudyBytes-Code/src/Backend/decks_csv/data.csv");
         csvFiles.add(dataFilePath);
