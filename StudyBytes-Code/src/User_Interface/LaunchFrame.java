@@ -17,7 +17,7 @@ public class LaunchFrame extends JFrame{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setSize(420,420);
         //this.setLayout(null);
-        LaunchPanel panel = new LaunchPanel(linkedDeck);
+        LaunchPanel panel = new LaunchPanel(linkedDeck, this);
         this.add(panel);
         this.setVisible(true);
     }

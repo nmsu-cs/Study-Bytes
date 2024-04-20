@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class LaunchPanel extends JPanel implements ActionListener
 {
     private Deck linkedDeck;
+    private LaunchFrame frame;                // Frame this panel exits in
     private GridBagConstraints constraints;   // GridBagConstraints object to modify constraints
     private JTextArea termField;              // Text field for card term
     private JTextArea definitionField;        // Text field for card definition
@@ -19,8 +20,10 @@ public class LaunchPanel extends JPanel implements ActionListener
     private JButton editButton;
     private JButton viewButton;
 
-    public LaunchPanel(Deck linkedDeck){
+    public LaunchPanel(Deck linkedDeck, LaunchFrame frame){
         this.linkedDeck = linkedDeck;
+        this.frame = frame;
+
 
         this.setBackground(Color.WHITE);
         this.setLayout(new FlowLayout());
@@ -38,18 +41,18 @@ public class LaunchPanel extends JPanel implements ActionListener
         this.add(editButton);
         this.add(viewButton);
 
-        if (linkedDeck.getDeck().size() == 0)
-        {   // Deck is empty, remove viewButton functionality
-            viewButton.setEnabled(false);
-        }
+//        if (linkedDeck.getDeck().size() == 0)
+//        {   // Deck is empty, remove viewButton functionality
+//            viewButton.setEnabled(false);
+//        }
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == editButton){
-            this.setVisible(false);
+            frame.dispose();
             DeckEditFrame edit = new DeckEditFrame(linkedDeck);
         }else if(e.getSource() == viewButton){
-            this.setVisible(false);
+            frame.dispose();
             FlashcardFrame view = new FlashcardFrame(linkedDeck);
         }
     }
