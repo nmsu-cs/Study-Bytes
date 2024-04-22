@@ -1,11 +1,23 @@
 package Backend;
 
+import User_Interface.LaunchFrame;
+import User_Interface.LaunchPanel;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVHandler {
-    private String directoryPath; // Path to the directory containing CSV files
+    private String directoryPath;    // Path to the directory containing CSV files
+    private LaunchPanel errorPanel;  // Panel to throw error messages
+
+    public CSVHandler()
+    {}
+
+    public CSVHandler(LaunchPanel errorPanel)
+    {
+        this.errorPanel = errorPanel;
+    }
 
     // Method to find CSV files in the specified directory
     public List<File> findCSVFiles(String pathname) {
@@ -36,6 +48,7 @@ public class CSVHandler {
     // Method to process CSV files and create decks
     public ArrayList<Deck> processCSVFiles(List<File> csvFiles) throws IOException {
         ArrayList<Deck> decks = new ArrayList<>();
+        boolean error = false;
 
         // Iterate through each CSV file
         for (File file : csvFiles) {
@@ -57,9 +70,14 @@ public class CSVHandler {
                     } else {
                         // Handle invalid CSV format
                         System.err.println("Invalid line in CSV file: " + line);
+                        errorPanel.throwError();
+                        error = true;
+                        break;
                     }
                 }
-                decks.add(currentDeck); // Add the deck to the list of decks
+                if (!error) {
+                    decks.add(currentDeck); // Add the deck to the list of decks
+                }
             } catch (IOException e) {
                 // Print error message if there's an error reading the CSV file
                 System.err.println("Error reading CSV file: " + file.getName());
@@ -72,7 +90,7 @@ public class CSVHandler {
     // Method to write a deck to a CSV file
     public void writeCSVFiles(Deck deck) throws IOException {
         // Construct the output file path
-        String outputPath = directoryPath + "/" + deck.getTitle() + ".csv";
+        String outputPath = directoryPath;
 
         try (FileWriter writer = new FileWriter(outputPath)) {
             // Iterate through each card in the deck and write it to the CSV file
@@ -88,5 +106,9 @@ public class CSVHandler {
             e.printStackTrace();
         }
         System.out.println("Deck has been written to " + outputPath); // Writing successful
+    }
+
+    public void setDirectoryPath(String directoryPath) {
+        this.directoryPath = directoryPath;
     }
 }
