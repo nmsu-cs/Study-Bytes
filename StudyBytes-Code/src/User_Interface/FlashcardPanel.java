@@ -95,11 +95,11 @@ public class FlashcardPanel extends JPanel implements ActionListener
         indexLabel = new JLabel();
         constraints.gridx = 1;
         constraints.gridy = 2;
-        constraints.weightx = 1;
+        constraints.weightx = 0;
         constraints.weighty = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
-        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(0, 10, 0, 10);
 
         this.add(indexLabel, constraints);
