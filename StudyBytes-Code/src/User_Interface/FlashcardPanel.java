@@ -46,7 +46,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
         // Create and place flashcard button in center of screen
         flashcard = new JButton();
         flashcard.addActionListener(this);
-        flashcard.setPreferredSize(new Dimension(900, 600));
+        flashcard.setPreferredSize(new Dimension(900, 550));
 
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -55,7 +55,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
         constraints.gridwidth = 3;
         constraints.gridheight = 1;
         constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(0, 0, 25, 0);
+        constraints.insets = new Insets(25, 0, 25, 0);
 
         this.add(flashcard, constraints);
 
@@ -107,7 +107,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
         // Create and add back button
         backButton = new JButton("Exit");
         backButton.addActionListener(this);
-        backButton.setPreferredSize(new Dimension(150, 50));
+        backButton.setPreferredSize(new Dimension(100, 50));
 
         constraints.gridx = 0;
         constraints.gridy = 0;

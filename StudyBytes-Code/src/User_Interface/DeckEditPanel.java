@@ -80,7 +80,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(25, 0, 0, 0);
-        backButton.setPreferredSize(new Dimension(150, 50));
+        backButton.setPreferredSize(new Dimension(100, 50));
 
         this.add(backButton, constraints);
 
