@@ -40,7 +40,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
 
         // Set up panel attributes
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.WHITE);
+        this.setBackground(new Color(204, 255, 255));
         constraints = new GridBagConstraints();
 
         // Create and place flashcard button in center of screen
@@ -95,7 +95,7 @@ public class FlashcardPanel extends JPanel implements ActionListener
         indexLabel = new JLabel();
         constraints.gridx = 1;
         constraints.gridy = 2;
-        constraints.weightx = 0;
+        constraints.weightx = 1;
         constraints.weighty = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
@@ -105,18 +105,18 @@ public class FlashcardPanel extends JPanel implements ActionListener
         this.add(indexLabel, constraints);
 
         // Create and add back button
-        backButton = new JButton("<-");
+        backButton = new JButton("Exit");
         backButton.addActionListener(this);
-        backButton.setPreferredSize(new Dimension(40, 40));
+        backButton.setPreferredSize(new Dimension(150, 50));
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.weightx = 0;
+        constraints.weightx = 1;
         constraints.weighty = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.insets = new Insets(0, 100, 0, 0);
+        constraints.insets = new Insets(0, 75, 0, 0);
 
         this.add(backButton, constraints);
 
@@ -124,8 +124,8 @@ public class FlashcardPanel extends JPanel implements ActionListener
         displayedCard = linkedDeck.getDeck().get(0);
 
         // Set initial flashcard data
-        term = displayedCard.getTerm();
-        definition = displayedCard.getDefinition();
+        term = addNewlines(displayedCard.getTerm());
+        definition = addNewlines(displayedCard.getDefinition());
         flashcard.setText("<html><center>" + term + "<center><html>");
         termDisplayed = true;
 
@@ -151,11 +151,13 @@ public class FlashcardPanel extends JPanel implements ActionListener
         {   // Flashcard clicked, flip card
             if (termDisplayed)
             {   // Show definition
+                definition = addNewlines(definition);   // Format to wrap long text on button
                 flashcard.setText("<html><center>" + definition + "<center><html>");
                 termDisplayed = false;
             }
             else
             {   // Show term
+                term = addNewlines(term);   // Format to wrap long text on button
                 flashcard.setText("<html><center>" + term + "<center><html>");
                 termDisplayed = true;
             }
@@ -164,8 +166,8 @@ public class FlashcardPanel extends JPanel implements ActionListener
         if (e.getSource() == nextCard)
         {   // Next button clicked, update values for flashcard button
             displayedCard = linkedDeck.getDeck().get(linkedDeck.getDeck().indexOf(displayedCard) + 1);
-            term = displayedCard.getTerm();
-            definition = displayedCard.getDefinition();
+            term = addNewlines(displayedCard.getTerm());
+            definition = addNewlines(displayedCard.getDefinition());
             flashcard.setText("<html><center>" + term + "<center><html>");
 
             // Update index label
@@ -179,8 +181,8 @@ public class FlashcardPanel extends JPanel implements ActionListener
         if (e.getSource() == prevCard)
         {   // Prev button clicked, update values for flashcard button
             displayedCard = linkedDeck.getDeck().get(linkedDeck.getDeck().indexOf(displayedCard) -1);
-            term = displayedCard.getTerm();
-            definition = displayedCard.getDefinition();
+            term = addNewlines(displayedCard.getTerm());
+            definition = addNewlines(displayedCard.getDefinition());
             flashcard.setText("<html><center>" + term + "<center><html>");
 
             // Update index label
@@ -214,6 +216,22 @@ public class FlashcardPanel extends JPanel implements ActionListener
         {   // Ensure next button is enabled
             nextCard.setEnabled(true);
         }
+    }
+
+    /**
+     * Adds a newline character every 100 characters in a String
+     *
+     * @param input
+     * @return
+     */
+    public static String addNewlines(String input) {
+        StringBuilder builder = new StringBuilder(input);
+        int offset = 0;
+        for (int i = 100; i < builder.length(); i += 100) {
+            builder.insert(i + offset, '\n');
+            offset++;
+        }
+        return builder.toString();
     }
 
 }

@@ -35,35 +35,102 @@ public class LaunchPanel extends JPanel implements ActionListener
         this.frame = frame;
         this.csvHandler = csvHandler;
 
+        GridBagConstraints constraints = new GridBagConstraints();
 
-        this.setBackground(Color.WHITE);
-        this.setLayout(new FlowLayout());
+        this.setBackground(new Color(204, 255, 255));
+        this.setLayout(new GridBagLayout());
 
-        editButton = new JButton();
-        editButton.setBounds(200,100,50,50);
-        editButton.setText("Edit");
-        editButton.addActionListener( this);
+        // Set up title label
+        JLabel title = new JLabel("Study Bytes");
+        title.setFont(new Font("Average", Font.BOLD, 100));
 
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(title, constraints);
+
+        // Set up sub title label
+        JLabel subTitle = new JLabel("The Superior Study Tool");
+        subTitle.setFont(new Font("Average", Font.ITALIC, 36));
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(subTitle, constraints);
+
+        // Set up view button
         viewButton = new JButton();
-        viewButton.setBounds(50,100,50,50);
-        viewButton.setText("View");
+        viewButton.setText("Study My Deck");
+        viewButton.setFont(new Font("Average", Font.PLAIN, 24));
+        viewButton.setPreferredSize(new Dimension(300, 100));
         viewButton.addActionListener( this);
 
-        // Create and set up download button
-        downloadButton = new JButton("Download");
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(50, 0, 5, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(viewButton, constraints);
+
+        // Set up edit button
+        editButton = new JButton();
+        editButton.setText("Edit My Deck");
+        editButton.setPreferredSize(new Dimension(150, 50));
+        editButton.addActionListener( this);
+
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(editButton, constraints);
+
+        // Set up download button
+        downloadButton = new JButton("Download Deck");
+        downloadButton.setPreferredSize(new Dimension(150, 50));
         downloadButton.addActionListener(this);
-        downloadButton.setBounds(350, 100, 50, 50);
 
-        // Create and set up upload button
-        uploadButton = new JButton("Upload");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(downloadButton, constraints);
+
+
+        // Set up upload button
+        uploadButton = new JButton("Upload Deck");
+        uploadButton.setPreferredSize(new Dimension(150, 50));
         uploadButton.addActionListener(this);
-        uploadButton.setBounds(500, 100, 50, 50);
 
-        // Add buttons to panel
-        this.add(editButton);
-        this.add(viewButton);
-        this.add(downloadButton);
-        this.add(uploadButton);
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1;
+        constraints.weighty = 0;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        this.add(uploadButton, constraints);
 
         if (linkedDeck.getDeck().size() == 0)
         {   // Deck is empty, remove viewButton and download functionality
@@ -89,7 +156,7 @@ public class LaunchPanel extends JPanel implements ActionListener
             File savePath;
             String stringPath;
 
-            message = "Are you sure you want to download this deck as a CSV file?";
+            message = "Download this deck as a CSV file?";
             paneResponse = JOptionPane.showConfirmDialog(null, message, "Confirm Download", JOptionPane.YES_NO_OPTION);
 
             if (paneResponse == 0) {   // "Yes" clicked, launch file chooser

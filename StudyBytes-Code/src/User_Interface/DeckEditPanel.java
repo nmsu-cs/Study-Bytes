@@ -20,19 +20,21 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
     private GridBagConstraints constraints;  // GridBagConstraints object
     private JButton saveButton;              // Button to save changes to deck
-    private JButton addButton;// Button to add a new card to deck
-
+    private JButton addButton;               // Button to add a new card to deck
     private JButton backButton;
+
     Deck linkedDeck;                         // Deck of cards, with each card containing a term and a definition
     CSVHandler csvHandler;
+    DeckEditFrame frame;
 
-    public DeckEditPanel(Deck linkedDeck, CSVHandler csvHandler)
+    public DeckEditPanel(Deck linkedDeck, CSVHandler csvHandler, DeckEditFrame frame)
     {
         this.linkedDeck = linkedDeck;
         this.csvHandler = csvHandler;
+        this.frame = frame;
 
         // Set up panel attributes
-        this.setBackground(Color.WHITE);
+        this.setBackground(new Color(204, 255, 255));
         this.setLayout(new GridBagLayout());        // Set layout of panel to GridBagLayout
         constraints = new GridBagConstraints();     // Create GridBagConstraints object
 
@@ -71,14 +73,14 @@ public class DeckEditPanel extends JPanel implements ActionListener
 
         this.add(addButton, constraints);
 
-        backButton = new JButton("<-");
+        backButton = new JButton("Exit");
         backButton.addActionListener(this);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_START;
         constraints.insets = new Insets(25, 0, 0, 0);
-        backButton.setPreferredSize(new Dimension(40, 40));
+        backButton.setPreferredSize(new Dimension(150, 50));
 
         this.add(backButton, constraints);
 
@@ -94,6 +96,9 @@ public class DeckEditPanel extends JPanel implements ActionListener
     {
         linkedDeck.getDeck().remove(card);
         this.remove(panel);
+
+        // Refresh frame
+        frame.refreshFrame();
     }
 
     @Override
@@ -113,7 +118,7 @@ public class DeckEditPanel extends JPanel implements ActionListener
             constraints.gridx = 0;
             constraints.gridy = linkedDeck.getDeck().size() + 1;
             constraints.insets = new Insets(25, 0, 25, 0);
-            linkedDeck.getDeck().add(new Card("", ""));   // Add empty card to deck
+            linkedDeck.getDeck().add(new Card("term", "definition"));   // Add empty card to deck
             this.add(new CardEditPanel(linkedDeck.getDeck().get(linkedDeck.getDeck().size() - 1), this), constraints);
 
             // Move down add button
@@ -123,6 +128,9 @@ public class DeckEditPanel extends JPanel implements ActionListener
             constraints.anchor = GridBagConstraints.CENTER;
             constraints.insets = new Insets(0, 0, 25, 0);
             this.add(addButton, constraints);
+
+            // Refresh frame
+            frame.refreshFrame();
         }
 
         if(e.getSource() == backButton){
